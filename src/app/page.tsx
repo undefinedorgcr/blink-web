@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { ArrowRight, MessageSquare, Lock, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const anybody = Anybody({ subsets: ['latin'] })
 
@@ -57,9 +58,11 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Here you would normally handle the submission to your backend
+    await axios.post('/api/blink', {
+      email: email,
+    })
     setSubmitted(true);
     setTimeout(() => {
       setEmail('');
